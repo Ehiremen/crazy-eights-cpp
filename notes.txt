@@ -1,0 +1,28 @@
+main.cpp (controller) -> assert players > 1; initialize and start the game
+
+model:
+    card.hpp
+    deckOfCards.hpp
+    palyer.hpp
+    game.hpp
+
+    card.hpp
+    -----------
+    struct {char suit, bool isFace, union{int value, char face}}
+
+    deckOfCards.hpp
+    -----------
+    initialize stack<card&>cardsInDeck
+    * shuffle cards before filling the deckOfCards
+
+    player
+    -----------
+    string name
+    init() -> for each player, pop X cards from deck into vector<card>hand
+
+    game.hpp
+    ----------
+    stack<card&> pileInPlay
+    card& topCard
+
+    
