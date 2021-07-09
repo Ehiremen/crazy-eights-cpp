@@ -6,6 +6,7 @@
 .DS_Store
 crazy-eights
 *.sh
+/.vscode
 
 ### C++ ###
 # Prerequisites
