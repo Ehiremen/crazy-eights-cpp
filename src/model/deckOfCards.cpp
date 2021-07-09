@@ -17,7 +17,14 @@ Deck::~Deck () {
 // ==========================================================
 
 auto Deck::createDeck() -> void {
-    cout << "placeholder\n";
+    for (char s: suitValues) {
+        for (int n: nonFaceValues) {
+            deck.push_back(new NonFaceCard(s, n));
+        }
+        for (char f: faceValues) {
+            deck.push_back(new FaceCard(s, f));
+        }
+    }
     return;
 } 
 

@@ -1,18 +1,18 @@
 main.cpp (controller) -> assert players > 1; initialize and start the game
 
 model:
-    card.hpp 
-    deckOfCards.hpp 
+    card.hpp [done]
+    deckOfCards.hpp [done] 
     palyer.hpp
     game.hpp
 
     card.hpp
     -----------
-    struct {char suit, bool isFace, union{int value, char face}}
+
 
     deckOfCards.hpp
     -----------
-    initialize deck with 52 cards -> shuffle cards
+    
     
 
     player
@@ -29,9 +29,10 @@ model:
 
 
     IN PROGRESS
-    [card] remove union. change to polymorphic class
 
 
     DONE
     [deck] popCard() => give out a card
     [deck] pushCards(deque<Card*>) => return cards to deck -> shuffle
+    [card] remove union. change to polymorphic class
+    [deck] initialize deck with 52 cards -> shuffle cards
