@@ -3,29 +3,22 @@ main.cpp (controller) -> assert players > 1; initialize and start the game
 model:
     card.hpp [done]
     deckOfCards.hpp [done] 
-    palyer.hpp
+    player.hpp
     game.hpp
 
-    card.hpp
+    player.hpp
     -----------
-
-
-    deckOfCards.hpp
-    -----------
-    
-    
-
-    player
-    -----------
-    string name = "Player" + num (passed to constructor)
-    init() -> for each player, pop X cards from deck into vector<card>hand
+    add printHand() to list cards in hand
+    add swapInHand(index1, index2) to allow reordering cards in hand
+    actions: pickFromDeck, playFromHand, rearrangeHand, summary
 
     game.hpp
     ----------
-    stack<card&> pileInPlay
-    card& topCard
-    //--
-    game() asks deck() for a hand and constructs a player with that hand.
+    playerSummary(): {playerName, numCardsInHand}
+    add rules for crazy eights gameplay
+    cycle through players, allowing each make a move
+    game ends when first player gets an empty hand
+    
 
 
     IN PROGRESS
@@ -36,3 +29,4 @@ model:
     [deck] pushCards(deque<Card*>) => return cards to deck -> shuffle
     [card] remove union. change to polymorphic class
     [deck] initialize deck with 52 cards -> shuffle cards
+    [game] game() asks deck() for a hand and constructs a player with that hand.

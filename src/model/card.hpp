@@ -10,18 +10,21 @@ const char suitValues[] = {'S', 'H', 'D', 'C'};
 const char faceValues[] = {'J', 'Q', 'K', 'A'};
 const int nonFaceValues[] = {2, 3, 4, 5, 6, 7, 8, 9, 10};
 
+// ==========================================================
+
 class Card {
-    protected:
+protected:
     char suit;
     bool isFace;
     stringstream asString;
 
-    public:
+public:
     Card(char suit, bool isFace) : suit(suit), isFace(isFace) { }
-    ~Card() { }
-    string toString() { return asString.str(); }
-    
-    bool operator == (Card& c) {
+    ~Card() = default;
+    auto toString() -> string { 
+        return asString.str(); 
+    }
+    auto operator == (Card& c) -> bool {
         return toString() == c.toString();
     }
     
@@ -32,27 +35,33 @@ inline ostream& operator << (ostream& out, Card& c) {
     return out;
 }
 
+// ==========================================================
+
 class FaceCard: public Card {
-    private:
+private:
     char value;
 
-    public:
+public:
     FaceCard(char suit, char value) : Card(suit, true), value(value) { 
         asString << value << " of " << suit;
     } 
-    ~FaceCard();
-    char getValue() { return value; }
+    ~FaceCard() = default;
+    auto getValue() -> char { return value; }
     
 };
 
+// ==========================================================
+
 class NonFaceCard: public Card {
-    private:
+private:
     int value;
 
-    public:
+public:
     NonFaceCard(char suit, int value) : Card(suit, false), value(value) { 
         asString << value << " of " << suit;
     } 
-    ~NonFaceCard();
-    int getValue() { return value; }
+    ~NonFaceCard() = default;
+    auto getValue() -> int { return value; }
 };
+
+// ==========================================================

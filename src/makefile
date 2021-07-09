@@ -7,7 +7,8 @@ CXX = c++
 CXXFLAGS = -std=c++14 -g -Wall -O1
 
 # Object modules comprising this application ----------------
-OBJ = main.o model/deckOfCards.o model/player.o
+OBJ = main.o model/deckOfCards.o model/player.o \
+		model/game.o
 
 # Build targets
 TARGETS = crazy-eights

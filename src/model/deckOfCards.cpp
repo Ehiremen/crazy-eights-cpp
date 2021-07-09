@@ -1,6 +1,7 @@
 #include "deckOfCards.hpp"
 
-Deck::Deck (int sizeOfHand) : sizeOfHand(sizeOfHand) {
+// provide default sizeOfHand=5 in case unspecified
+Deck::Deck (int sizeOfHand=5) : sizeOfHand(sizeOfHand) {
     createDeck();
     shuffleDeck();
     cout << "New deck created with " << deck.size() << " cards\n";
@@ -12,6 +13,7 @@ Deck::~Deck () {
     for (Card* c: deck) {
         delete c;
     }
+    cout << "Destroyed deck" << endl;
 }
 
 // ==========================================================

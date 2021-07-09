@@ -5,20 +5,11 @@
 
 using namespace std;
 
-void banner () {
-    cout << endl << endl << " ";
-    for (int i=0; i<30; i++) cout << "-";
-    // cout << endl << "|" << "|";
-    printf("\n|%31s", "|");
-    printf("\n|%31s", "|");
-    printf("\n%-9s%s%11s", "|", "CRAZY EIGHTS", "|");
-    printf("\n|%31s", "|");
-    printf("\n|%31s\n ", "|");
-    for (int i=0; i<30; i++) cout << "-";
-    cout << endl << endl << endl;
-}
+auto banner () -> void ;
 
-int main (int argc, char** argv) {
+// =========================================================
+
+auto main (int argc, char** argv) -> int {
     if (argc != 3) {
         cerr << "expected: crazy-eights {numPlayers} {sizeOfPlayerHand}" << endl;
         return badArgCount;
@@ -42,8 +33,23 @@ int main (int argc, char** argv) {
     }
 
     banner();
-    // Game* game = new Game(numPlayers);
-    Deck d(sizeOfHand);
+    Game game(numPlayers, sizeOfHand);
+    // Deck d(sizeOfHand);
     cout << "normal termination" << endl << endl;
     return 0;
+}
+
+// =========================================================
+
+auto banner () -> void {
+    cout << endl << endl << " ";
+    for (int i=0; i<30; i++) cout << "-";
+    // cout << endl << "|" << "|";
+    printf("\n|%31s", "|");
+    printf("\n|%31s", "|");
+    printf("\n%-9s%s%11s", "|", "CRAZY EIGHTS", "|");
+    printf("\n|%31s", "|");
+    printf("\n|%31s\n ", "|");
+    for (int i=0; i<30; i++) cout << "-";
+    cout << endl << endl << endl;
 }
