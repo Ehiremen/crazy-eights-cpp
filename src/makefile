@@ -1,12 +1,13 @@
 # Go to dir with project in terminal and run:
 #	c++ -MM *.c >> makefile
 
+#INC = -I/model
 # Compile with debug option and all warnings on. ------------
 CXX = c++
-CXXFLAGS = -std=c++17 -g -Wall -O1
+CXXFLAGS = -std=c++14 -g -Wall -O1
 
 # Object modules comprising this application ----------------
-OBJ = main.o
+OBJ = main.o model/deckOfCards.o model/player.o
 
 # Build targets
 TARGETS = crazy-eights

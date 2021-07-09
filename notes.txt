@@ -1,8 +1,8 @@
 main.cpp (controller) -> assert players > 1; initialize and start the game
 
 model:
-    card.hpp
-    deckOfCards.hpp
+    card.hpp 
+    deckOfCards.hpp 
     palyer.hpp
     game.hpp
 
@@ -12,17 +12,26 @@ model:
 
     deckOfCards.hpp
     -----------
-    initialize stack<card&>cardsInDeck
-    * shuffle cards before filling the deckOfCards
+    initialize deck with 52 cards -> shuffle cards
+    
 
     player
     -----------
-    string name
+    string name = "Player" + num (passed to constructor)
     init() -> for each player, pop X cards from deck into vector<card>hand
 
     game.hpp
     ----------
     stack<card&> pileInPlay
     card& topCard
+    //--
+    game() asks deck() for a hand and constructs a player with that hand.
 
-    
+
+    IN PROGRESS
+    [card] remove union. change to polymorphic class
+
+
+    DONE
+    [deck] popCard() => give out a card
+    [deck] pushCards(deque<Card*>) => return cards to deck -> shuffle

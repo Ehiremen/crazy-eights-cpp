@@ -1,5 +1,7 @@
 #include <iostream>
 #include "model/game.hpp"
+#include "model/deckOfCards.hpp"
+#include "model/player.hpp"
 
 using namespace std;
 
@@ -17,19 +19,31 @@ void banner () {
 }
 
 int main (int argc, char** argv) {
-    if (argc != 2) {
-        cerr << "expected: crazy-eights {numPlayers}" << endl;
-        return -1;
+    if (argc != 3) {
+        cerr << "expected: crazy-eights {numPlayers} {sizeOfPlayerHand}" << endl;
+        return badArgCount;
     }
 
-    int numPlayers = atoi(argv[1]);
+    /*  atoi() doesn't throw exceptions, so I'm "validating"
+        by checking if the value falls within an arbitrary
+        range 
+    */
+
+    int numPlayers = 0; numPlayers = atoi(argv[1]);
     if (numPlayers < 2 || numPlayers > 6) {
         cerr << "only 2 to 6 players allowed" << endl;
-        return -1;
+        return badNumPlayers;
+    }
+
+    int sizeOfHand = 0; sizeOfHand = atoi(argv[2]);
+    if (sizeOfHand < 5 || (sizeOfHand*numPlayers > 30)) {
+        cerr << "size of hand must be between 5 and " << (30/numPlayers) << endl;
+        return badHandSize;
     }
 
     banner();
-    Game* game = new Game(numPlayers);
+    // Game* game = new Game(numPlayers);
+    Deck d(sizeOfHand);
     cout << "normal termination" << endl << endl;
     return 0;
 }
