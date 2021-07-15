@@ -11,4 +11,12 @@ private:
 public:
     Player(string name, vector<Card*> hand);
     ~Player();
+    auto printHand() -> void {
+        for (Card* c: hand) {
+            cout << *c << endl;
+        }
+    }
+    auto getName() -> string {
+        return name;
+    }
 };

@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), sizeOfHand(sizeOfHand), deck(Deck(numPlayers)) 
+Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand)) 
 {
     for (int i=1; i<=numPlayers; i++) {
         initNewPlayer("Player " + to_string(i));
@@ -8,6 +8,12 @@ Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), sizeOfHand
 
     cout << "Game initialized with " << players.size() << " players\n";
     cout << "-----Setup complete...-----" << endl << endl;
+
+    // for (Player*p : players) {
+    //     cout << p->getName() << "'s hand: \n";
+    //     p->printHand();
+    //     cout << endl;
+    // }
 }
 
 // =========================================================
