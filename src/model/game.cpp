@@ -1,14 +1,23 @@
 #include "game.hpp"
 
-Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand)) 
+Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), 
+sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand)) 
 {
     for (int i=1; i<=numPlayers; i++) {
         initNewPlayer("Player " + to_string(i));
     }
 
-    cout << "Game initialized with " << players.size() << " players\n";
+    topCard = deck.popCard();
+
+    cout << "\nGame initialized with " << players.size() << " players\n";
+    cout << "Top card: " << *topCard << endl;
     cout << "-----Setup complete...-----" << endl << endl;
 
+    // cout << "Before swap:\n";
+    // players[0]->printHand();
+    // players[0]->swapInHand(0,1);
+    // cout << "\n\nAfter swap:\n";
+    // players[0]->printHand();
     // for (Player*p : players) {
     //     cout << p->getName() << "'s hand: \n";
     //     p->printHand();
@@ -19,7 +28,9 @@ Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), sizeOfHand
 // =========================================================
 
 Game::~Game () {
+    cout << "Returning play-pile to deck" << endl;
     deck.pushCards(pileInPlay);
+    cout << endl;
 
     if (topCard) {
         delete topCard;
