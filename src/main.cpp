@@ -10,8 +10,8 @@ auto banner () -> void ;
 // =========================================================
 
 auto main (int argc, char** argv) -> int {
-    if (argc != 3) {
-        cerr << "expected: crazy-eights {numPlayers} {sizeOfPlayerHand}" << endl;
+    if (argc != 2) {
+        cerr << "expected: crazy-eights {numPlayers}" << endl;
         return badArgCount;
     }
 
@@ -21,16 +21,12 @@ auto main (int argc, char** argv) -> int {
     */
 
     int numPlayers = 0; numPlayers = atoi(argv[1]);
-    if (numPlayers < 2 || numPlayers > 6) {
-        cerr << "only 2 to 6 players allowed" << endl;
+    if (numPlayers < 2 || numPlayers > 5) {
+        cerr << "only 2 to 5 players allowed" << endl;
         return badNumPlayers;
     }
 
-    int sizeOfHand = 0; sizeOfHand = atoi(argv[2]);
-    if (sizeOfHand < 5 || (sizeOfHand*numPlayers > 30)) {
-        cerr << "size of hand must be between 5 and " << (30/numPlayers) << endl;
-        return badHandSize;
-    }
+    int sizeOfHand = (numPlayers == 2) ? 7 : 5;
 
     banner();
     Game game(numPlayers, sizeOfHand);

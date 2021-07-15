@@ -19,7 +19,7 @@ private:
     auto shuffleDeck() -> void;
 
 public:
-    Deck (int sizeOfHand=5);
+    Deck (int sizeOfHand);
     ~Deck ();
     
     auto dealHand(vector<Card*>& hand) -> void;
