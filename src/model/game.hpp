@@ -9,7 +9,9 @@ private:
     vector<Player*> players;
     deque<Card*> pileInPlay;
     Card* topCard;
+
     auto initNewPlayer(string name) -> void;
+    auto summarizePlayers() -> void;
 
 public:
     Game(int numPlayers, int sizeOfHand);

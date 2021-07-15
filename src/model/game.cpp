@@ -53,3 +53,12 @@ auto Game::initNewPlayer(string name) -> void {
 }
 
 // =========================================================
+
+auto Game::summarizePlayers() -> void {
+    for (Player* p:players) {
+        cout << p->getName() << " has " << p->sizeOfHand()
+            << " cards in hand" << endl;
+    }
+}
+
+// =========================================================
