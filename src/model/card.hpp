@@ -21,6 +21,7 @@ protected:
     char suit;
     int value;
     bool isFace;
+    int scoreValue;
     stringstream asString;
 
 public:
@@ -39,6 +40,12 @@ public:
     // auto getValue() -> int { return value; }
 
     // auto getSuit() -> char { return suit; }
+    
+    auto getScoreValue() -> int { 
+        if (value == 8) return 50;
+        if (value >= 10) return 10;
+        return value;
+    }
 
     auto valuesMatch(Card& c) -> bool { return value == c.value; }
     

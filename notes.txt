@@ -29,3 +29,23 @@ model:
     [player] add printHand() to list cards in hand
     [player] add swapInHand(index1, index2) to allow reordering cards in hand
     [game] summarizePlayers(): {playerName, numCardsInHand}
+
+
+    //==========================================
+    RULES USED (from https://bicyclecards.com/how-to-play/crazy-eights/)
+    * my version only allows 2-5 players and uses only ONE deck.
+    * 7 starting cards for 2 players; 5 cards otherwise
+    * if starting card (top card after dealing) is an 8, 
+        shuffle it into deck and pull another card
+    * during play, valid cards match suit or value of top card
+    * anyone who plays an 8 decides what suit must be played next
+    * stacking (playing multiple) cards in a turn not allowed
+    * if no valid card to play during a turn, player draws from deck until 
+        a playable card is available
+        * if deck is empty, player is allowed to "pass" (skip turn)
+        * forced to play card if draws a playable card from pile
+    * player is allowed to draw from pile during turn even if player has
+        playable card(s)
+    * game ends when one player empties their hand. that player wins
+    * winner's score = sum of value of cards in every other player's hand
+        * 8 = 50 pts, A = 1 pt, face card = 10 pts, non-fave = $value pts
