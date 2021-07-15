@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <map>
 #include "errors.hpp"
 
 using namespace std;
@@ -9,24 +10,41 @@ using namespace std;
 const char suitValues[] = {'S', 'H', 'D', 'C'};
 const char faceValues[] = {'J', 'Q', 'K', 'A'};
 const int nonFaceValues[] = {2, 3, 4, 5, 6, 7, 8, 9, 10};
+const map<char, int> faceToInt = { 
+        {'A', 1}, {'J', 11}, {'Q', 12}, {'K', 13}
+    };
 
 // ==========================================================
 
 class Card {
 protected:
     char suit;
+    int value;
     bool isFace;
     stringstream asString;
 
 public:
-    Card(char suit, bool isFace) : suit(suit), isFace(isFace) { }
+    Card(char suit, int value, bool isFace = false) : suit(suit), isFace(isFace) { 
+        if (!isFace) {
+            asString << value << " of " << suit;
+        }
+    }
+    
     ~Card() = default;
+    
     auto toString() -> string { 
         return asString.str(); 
     }
-    auto operator == (Card& c) -> bool {
-        return toString() == c.toString();
-    }
+    
+    // auto getValue() -> int { return value; }
+
+    // auto getSuit() -> char { return suit; }
+
+    auto valuesMatch(Card& c) -> bool { return value == c.value; }
+    
+    auto suitsMatch(Card& c) -> bool { return suit == c.suit; }
+    
+    // auto operator == (Card& c) -> bool { return toString() == c.toString(); }
     
 };
 
@@ -39,29 +57,16 @@ inline ostream& operator << (ostream& out, Card& c) {
 
 class FaceCard: public Card {
 private:
-    char value;
+    char face;
 
 public:
-    FaceCard(char suit, char value) : Card(suit, true), value(value) { 
-        asString << value << " of " << suit;
+    FaceCard(char suit, char face) : Card(suit, faceToInt.at(face), true), face(face) { 
+        asString << face << " of " << suit;
     } 
-    ~FaceCard() = default;
-    auto getValue() -> char { return value; }
     
-};
-
-// ==========================================================
-
-class NonFaceCard: public Card {
-private:
-    int value;
-
-public:
-    NonFaceCard(char suit, int value) : Card(suit, false), value(value) { 
-        asString << value << " of " << suit;
-    } 
-    ~NonFaceCard() = default;
-    auto getValue() -> int { return value; }
+    ~FaceCard() = default;
+    
+    // auto getFace() -> char { return face; }
 };
 
 // ==========================================================

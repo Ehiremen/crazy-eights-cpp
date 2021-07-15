@@ -1,7 +1,7 @@
 #include "deckOfCards.hpp"
 
 // provide default sizeOfHand=5 in case unspecified
-Deck::Deck (int sizeOfHand=5) : sizeOfHand(sizeOfHand) {
+Deck::Deck (int sizeOfHand) : sizeOfHand(sizeOfHand) {
     createDeck();
     shuffleDeck();
     cout << "New deck created with " << deck.size() << " cards\n";
@@ -21,7 +21,7 @@ Deck::~Deck () {
 auto Deck::createDeck() -> void {
     for (char s: suitValues) {
         for (int n: nonFaceValues) {
-            deck.push_back(new NonFaceCard(s, n));
+            deck.push_back(new Card(s, n));
         }
         for (char f: faceValues) {
             deck.push_back(new FaceCard(s, f));
