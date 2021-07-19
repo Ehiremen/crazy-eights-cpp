@@ -8,10 +8,13 @@ Game::Game (int numPlayers, int sizeOfHand, vector<string>& playerNames)
         initNewPlayer(playerNames[i-1]);
     }
 
-    topCard = deck.popCard();
+    initTopCard();
+    shufflePlayers();
 
     cout << "\nGame initialized with " << players.size() << " players\n";
-    cout << "Top card: " << *topCard << endl;
+    cout << "Player order is: ";
+    for (Player* p : players) { cout << p->getName() << " -> "; }
+    cout << "\n\nTop card: " << *topCard << endl;
     cout << "-----Setup complete...-----" << endl << endl;
 
     summarizePlayers();
@@ -85,5 +88,25 @@ auto Game::calcWinnerScore() -> int {
 
 // =========================================================
 
+auto Game::shufflePlayers() -> void {
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    shuffle(players.begin(), players.end(), default_random_engine(seed));
+}
+
+// =========================================================
+
+auto Game::initTopCard() -> void {
+    topCard = deck.popCard();
+    deque<Card*> returnToDeck;
+
+    while (topCard->isEight()) {
+        returnToDeck.push_back(topCard);
+        topCard = deck.popCard();
+    }
+
+    if (!returnToDeck.empty()) { deck.pushCards(returnToDeck); }
+}
+
+// =========================================================
 auto Game::run() -> void {
 }

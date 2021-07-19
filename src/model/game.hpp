@@ -1,6 +1,13 @@
 #pragma once
 #include "player.hpp"
 
+enum class PlayerActions {
+    pickFromDeck,
+    playFromHand,
+    rearrangeHand,
+    showSummary
+};
+
 class Game{
 private:
     int numPlayers;
@@ -10,9 +17,11 @@ private:
     deque<Card*> pileInPlay;
     Card* topCard;
 
+    auto initTopCard() -> void;
     auto initNewPlayer(string name) -> void;
     auto summarizePlayers() -> void;
     auto calcWinnerScore() -> int;
+    auto shufflePlayers() -> void;
 
 public:
     Game(int numPlayers, int sizeOfHand, vector<string>& playerNames);
