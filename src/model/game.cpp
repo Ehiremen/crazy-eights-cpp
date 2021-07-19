@@ -10,14 +10,14 @@ Game::Game (int numPlayers, int sizeOfHand, vector<string>& playerNames)
 
     initTopCard();
     shufflePlayers();
+    currentPlayerIterator = players.begin();
 
     cout << "\nGame initialized with " << players.size() << " players\n";
     cout << "Player order is: ";
     for (Player* p : players) { cout << p->getName() << " -> "; }
-    cout << "\n\nTop card: " << *topCard << endl;
+    cout << "\nTop card: " << *topCard << endl;
     cout << "-----Setup complete...-----" << endl << endl;
 
-    summarizePlayers();
     // cout << "Before swap:\n";
     // players[0]->printHand();
     // players[0]->swapInHand(0,1);
@@ -107,6 +107,16 @@ auto Game::initTopCard() -> void {
     if (!returnToDeck.empty()) { deck.pushCards(returnToDeck); }
 }
 
-// =========================================================
+// ========================================================
+
+auto Game::nextPlayer() -> void {
+    currentPlayerIterator++;
+    if (currentPlayerIterator == players.end()) {
+        currentPlayerIterator = players.begin();
+    }
+}
+
+// ========================================================
+
 auto Game::run() -> void {
 }
