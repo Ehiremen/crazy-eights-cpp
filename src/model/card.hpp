@@ -34,7 +34,8 @@ public:
     ~Card() = default;
     
     auto toString() -> string { return asString.str(); }
-    
+
+    auto isEight() -> bool { return value == 8; } 
     // auto getValue() -> int { return value; }
 
     // auto getSuit() -> char { return suit; }
