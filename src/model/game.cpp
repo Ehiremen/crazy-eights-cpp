@@ -1,10 +1,11 @@
 #include "game.hpp"
 
-Game::Game (int numPlayers, int sizeOfHand) : numPlayers(numPlayers), 
-sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand)) 
+Game::Game (int numPlayers, int sizeOfHand, vector<string>& playerNames) 
+: numPlayers(numPlayers), sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand)) 
 {
     for (int i=1; i<=numPlayers; i++) {
-        initNewPlayer("Player " + to_string(i));
+        // initNewPlayer("Player " + to_string(i));
+        initNewPlayer(playerNames[i-1]);
     }
 
     topCard = deck.popCard();
@@ -13,6 +14,7 @@ sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand))
     cout << "Top card: " << *topCard << endl;
     cout << "-----Setup complete...-----" << endl << endl;
 
+    summarizePlayers();
     // cout << "Before swap:\n";
     // players[0]->printHand();
     // players[0]->swapInHand(0,1);
@@ -23,6 +25,13 @@ sizeOfHand(sizeOfHand), deck(Deck(sizeOfHand))
     //     p->printHand();
     //     cout << endl;
     // }
+
+    // printHand() of each player in players
+    // for (Player*p : players) {
+    //     p->printHand();
+    //     cout << endl;
+    // }
+
 }
 
 // =========================================================
@@ -77,5 +86,4 @@ auto Game::calcWinnerScore() -> int {
 // =========================================================
 
 auto Game::run() -> void {
-
 }

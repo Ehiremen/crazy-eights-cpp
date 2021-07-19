@@ -18,8 +18,11 @@ Player::~Player() {
 // ==========================================================
 
 auto Player::printHand() -> void {
+    int indexPlusOne = 1;
+    cout << name << "'s hand: " << endl;
     for (Card* c: hand) {
-        cout << *c << endl;
+        cout << setw(2) << indexPlusOne << ". " << *c << endl;
+        indexPlusOne++;
     }
 }
 

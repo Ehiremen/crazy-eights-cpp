@@ -10,8 +10,8 @@ auto banner () -> void ;
 // =========================================================
 
 auto main (int argc, char** argv) -> int {
-    if (argc != 2) {
-        cerr << "expected: crazy-eights {numPlayers}" << endl;
+    if (argc < 2) {
+        cerr << "expected: crazy-eights {numPlayers} {space-separated-playerNames}" << endl;
         return badArgCount;
     }
 
@@ -25,11 +25,26 @@ auto main (int argc, char** argv) -> int {
         cerr << "only 2 to 5 players allowed" << endl;
         return badNumPlayers;
     }
-
     int sizeOfHand = (numPlayers == 2) ? 7 : 5;
 
+    // validate that argc is correct
+        if (argc != 2 + numPlayers) {
+        cerr << "expected: crazy-eights {numPlayers} ";
+        for (int i=1; i<=numPlayers; i++) {
+            cerr << "{name" << i << "} ";
+        }
+        cerr << endl;
+        return badNumPlayerNames;
+    }
+
+    // store playerNames in a vector of strings
+    vector<string> playerNames;
+    for (int i = 2; i < argc; i++) {
+        playerNames.push_back(argv[i]);
+    }
+
     banner();
-    Game game(numPlayers, sizeOfHand);
+    Game game(numPlayers, sizeOfHand, playerNames);
     // Deck d(sizeOfHand);
     cout << "normal termination" << endl << endl;
     return 0;
