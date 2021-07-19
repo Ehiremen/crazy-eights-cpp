@@ -39,3 +39,15 @@ auto Player::validateIndex(int index) -> bool {
     if (index > hand.size()) return false;
     return true;
 }
+
+// ==========================================================
+
+auto Player::calcHandScore() -> int {
+    int score = 0;
+
+    for (Card* c:hand) {
+        score += c->getScoreValue();
+    }
+    
+    return score;
+}

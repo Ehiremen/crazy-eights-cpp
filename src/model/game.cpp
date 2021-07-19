@@ -62,3 +62,20 @@ auto Game::summarizePlayers() -> void {
 }
 
 // =========================================================
+
+auto Game::calcWinnerScore() -> int {
+    int score = 0;
+
+// loop through each player and add their score to the total
+    for (Player* p:players) {
+        score += p->calcHandScore();
+    }
+
+    return score;
+}
+
+// =========================================================
+
+auto Game::run() -> void {
+
+}

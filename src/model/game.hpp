@@ -12,6 +12,8 @@ private:
 
     auto initNewPlayer(string name) -> void;
     auto summarizePlayers() -> void;
+    auto calcWinnerScore() -> int;
+    auto run() -> void;
 
 public:
     Game(int numPlayers, int sizeOfHand);

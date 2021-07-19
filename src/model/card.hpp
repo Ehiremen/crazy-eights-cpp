@@ -33,9 +33,7 @@ public:
     
     ~Card() = default;
     
-    auto toString() -> string { 
-        return asString.str(); 
-    }
+    auto toString() -> string { return asString.str(); }
     
     // auto getValue() -> int { return value; }
 
