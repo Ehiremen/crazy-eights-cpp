@@ -3,17 +3,15 @@
 #include "model/deckOfCards.hpp"
 #include "model/player.hpp"
 
+auto banner () -> void;
+auto minTwoArgs(const int argc) -> bool;
+auto validateArgc(const int argc, const int numPlayers) -> bool;
+
 using namespace std;
-
-auto banner () -> void ;
-
 // =========================================================
 
 auto main (int argc, char** argv) -> int {
-    if (argc < 2) {
-        cerr << "expected: crazy-eights {numPlayers} {space-separated-playerNames}" << endl;
-        return badArgCount;
-    }
+    if (!minTwoArgs(argc)) { return badArgCount; }
 
     /*  atoi() doesn't throw exceptions, so I'm "validating"
         by checking if the value falls within an arbitrary
@@ -25,23 +23,15 @@ auto main (int argc, char** argv) -> int {
         cerr << "only 2 to 5 players allowed" << endl;
         return badNumPlayers;
     }
-    int sizeOfHand = (numPlayers == 2) ? 7 : 5;
 
+    int sizeOfHand = (numPlayers == 2) ? 7 : 5;
+    
     // validate that argc is correct
-        if (argc != 2 + numPlayers) {
-        cerr << "expected: crazy-eights {numPlayers} ";
-        for (int i=1; i<=numPlayers; i++) {
-            cerr << "{name" << i << "} ";
-        }
-        cerr << endl;
-        return badNumPlayerNames;
-    }
+        if (!validateArgc(argc, numPlayers)) { return badNumPlayerNames; }
 
     // store playerNames in a vector of strings
     vector<string> playerNames;
-    for (int i = 2; i < argc; i++) {
-        playerNames.push_back(argv[i]);
-    }
+    for (int i = 2; i < argc; i++) { playerNames.push_back(argv[i]); }
 
     banner();
     Game game(numPlayers, sizeOfHand, playerNames);
@@ -63,4 +53,28 @@ auto banner () -> void {
     printf("\n|%31s\n ", "|");
     for (int i=0; i<30; i++) cout << "-";
     cout << endl << endl << endl;
+}
+
+// =========================================================
+
+auto minTwoArgs(const int argc) -> bool {
+    if (argc < 2) {
+        cerr << "expected: crazy-eights {numPlayers} {space-separated-playerNames}" << endl;
+        return false;
+    }
+    return true;
+}
+
+// =========================================================
+
+auto validateArgc(const int argc, const int numPlayers) -> bool {
+   if (argc != 2 + numPlayers) {
+        cerr << "expected: crazy-eights {numPlayers} ";
+        for (int i=1; i<=numPlayers; i++) {
+            cerr << "{name" << i << "} ";
+        }
+        cerr << endl;
+        return false; 
+   }
+   return true;
 }
