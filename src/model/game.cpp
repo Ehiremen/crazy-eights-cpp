@@ -18,6 +18,8 @@ Game::Game (int numPlayers, int sizeOfHand, vector<string>& playerNames)
     cout << "\nTop card: " << *topCard << endl;
     cout << "-----Setup complete...-----" << endl << endl;
 
+    run();
+}
     // cout << "Before swap:\n";
     // players[0]->printHand();
     // players[0]->swapInHand(0,1);
@@ -34,8 +36,6 @@ Game::Game (int numPlayers, int sizeOfHand, vector<string>& playerNames)
     //     p->printHand();
     //     cout << endl;
     // }
-
-}
 
 // =========================================================
 
@@ -118,5 +118,83 @@ auto Game::nextPlayer() -> void {
 
 // ========================================================
 
+auto Game::pickMove() -> void {
+    int choice = -1;
+    do {
+        cout << "Pick a move: \n";
+        for (pair<PlayerActions, string> p:PlayerActionsMap) {
+            cout << int(p.first) << ". " << p.second << endl;
+        }
+        cout << "Choice: ";
+        cin >> choice;
+
+        if (choice < 0 || choice > 3) { cout << "Please retry ..." << endl << endl; }
+        else { cout << endl; }
+    } while (choice < 0 || choice > 3);
+
+    switch (choice) {
+        case int(PlayerActions::pickFromDeck): pickFromDeck(); break;
+        case int(PlayerActions::playFromHand): playFromHand(); break;
+        case int(PlayerActions::rearrangeHand): rearrangeHand(); break;
+        case int(PlayerActions::showSummary): summarizePlayers(); break;
+    }
+
+}
+
+// ========================================================
+
+auto Game::pickFromDeck() -> void {
+    (*currentPlayerIterator)->addCardToHand(deck.popCard());
+    (*currentPlayerIterator)->printHand();
+}
+
+// ========================================================
+
+auto Game::playFromHand() -> void {
+    
+    endTurn = true;
+}
+
+// ========================================================
+
+auto Game::rearrangeHand() -> void {
+    int card1, card2;
+
+    (*currentPlayerIterator)->printHand();
+
+    cout << "Choose two cards to swap: ";
+    cin >> card1 >> card2;
+    (*currentPlayerIterator)->swapInHand(card1, card2);
+    (*currentPlayerIterator)->printHand();
+
+}
+
+// ========================================================
+
 auto Game::run() -> void {
+    for (;;) {
+        if (pileInPlay.size() > deck.size()) { deck.pushCards(pileInPlay); }
+        endTurn = false;
+        while (!endTurn) {
+            pickMove();
+        }
+
+        if ((*currentPlayerIterator)->handIsEmpty()) {
+            announceWinner();
+            return;
+        }
+
+        nextPlayer();
+    }
+    pickMove();
+}
+
+// ========================================================
+
+auto Game::announceWinner() -> void {
+    int score = calcWinnerScore();
+
+    cout << "Game over!\n";
+    cout << (*currentPlayerIterator)->getName() << " wins with a score of " << score << endl;
+    cout << "-----Game Over-----\n\n" << endl;
 }

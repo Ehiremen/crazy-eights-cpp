@@ -25,4 +25,5 @@ public:
     auto dealHand(vector<Card*>& hand) -> void;
     auto popCard() -> Card*; // remove from top
     auto pushCards (deque<Card*>& d) -> void; // add to bottom
+    auto size() -> int { return deck.size(); }
 };

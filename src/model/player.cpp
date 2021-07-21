@@ -18,11 +18,11 @@ Player::~Player() {
 // ==========================================================
 
 auto Player::printHand() -> void {
-    int indexPlusOne = 1;
+    int index = 0;
     cout << name << "'s hand: " << endl;
     for (Card* c: hand) {
-        cout << setw(2) << indexPlusOne << ". " << *c << endl;
-        indexPlusOne++;
+        cout << setw(2) << index << ". " << *c << endl;
+        index++;
     }
 }
 
@@ -33,13 +33,16 @@ auto Player::swapInHand(int i, int j) -> void {
     if (validateIndex(i) && validateIndex(j)) {
         swap(hand[i], hand[j]);
     }
+    else {
+        cout << "Invalid indexes selected" << endl;
+    }
 }
 
 // ==========================================================
 
 auto Player::validateIndex(int index) -> bool {
     if (index < 0) return false;
-    if (index > hand.size()) return false;
+    if (index >= hand.size()) return false;
     return true;
 }
 
@@ -53,4 +56,10 @@ auto Player::calcHandScore() -> int {
     }
     
     return score;
+}
+
+// ==========================================================
+
+auto Player::addCardToHand(Card* card) -> void {
+    hand.push_back(card);
 }

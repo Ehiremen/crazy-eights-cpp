@@ -19,4 +19,6 @@ public:
     auto validateIndex(int index) -> bool;
     auto sizeOfHand() -> int { return hand.size(); }
     auto calcHandScore() -> int;
+    auto addCardToHand(Card* card) -> void;
+    auto handIsEmpty() -> bool { return hand.empty(); }
 };
