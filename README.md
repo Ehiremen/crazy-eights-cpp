@@ -1,4 +1,4 @@
-# crazy-eights-cpp
+# crazy-eights-cpp (work-in-progress)
 
 console based implementations of crazy eights (the card game) in c++.
 
